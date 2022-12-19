@@ -2,6 +2,7 @@ package com.gustxvo.currencyconverter
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.viewbinding.BuildConfig
 import com.gustxvo.currencyconverter.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
