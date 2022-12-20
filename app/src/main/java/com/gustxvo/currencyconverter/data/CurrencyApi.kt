@@ -7,12 +7,12 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
 
-const val BASE_URL = "https://api.apilayer.com/exchangerates_data"
+const val BASE_URL = "https://api.apilayer.com/exchangerates_data/"
 
 interface CurrencyApi {
 
     @Headers("apiKey: $API_KEY")
-    @GET("/latest")
+    @GET("latest")
     suspend fun getRates(
         @Query("base") base: String
     ): Response<CurrencyResponse>

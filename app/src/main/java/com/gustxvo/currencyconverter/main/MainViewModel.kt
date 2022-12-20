@@ -26,7 +26,7 @@ class MainViewModel @Inject constructor(
         fromCurrency: String,
         toCurrency: String
     ) {
-        val fromAmount = amountString.toFloatOrNull()
+        val fromAmount = amountString.toDoubleOrNull()
 
         if (fromAmount == null) {
             _conversion.value = CurrencyEvent.Failure("Not a valid amount")
@@ -58,7 +58,7 @@ class MainViewModel @Inject constructor(
 
     sealed class CurrencyEvent {
         class Success(val resultText: String) : CurrencyEvent()
-        class Failure(val resultText: String?) : CurrencyEvent()
+        class Failure(val errorText: String?) : CurrencyEvent()
         object Loading : CurrencyEvent()
         object Empty : CurrencyEvent()
     }
@@ -67,7 +67,7 @@ class MainViewModel @Inject constructor(
         "CAD" -> rates.CAD
         "HKD" -> rates.HKD
         "ISK" -> rates.ISK
-        "EUR" -> rates.EUR
+        "EUR" -> rates.EUR.toDouble()
         "PHP" -> rates.PHP
         "DKK" -> rates.DKK
         "HUF" -> rates.HUF

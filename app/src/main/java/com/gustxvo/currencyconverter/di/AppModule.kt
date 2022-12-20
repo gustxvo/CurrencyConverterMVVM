@@ -3,8 +3,10 @@ package com.gustxvo.currencyconverter.di
 import com.gustxvo.currencyconverter.data.BASE_URL
 import com.gustxvo.currencyconverter.data.CurrencyApi
 import com.gustxvo.currencyconverter.main.DefaultMainRepository
+import com.gustxvo.currencyconverter.main.MainRepository
 import com.gustxvo.currencyconverter.util.DispatcherProvider
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,13 +32,14 @@ object AppModule {
     @Singleton
     @Provides
     fun provideMoshi(): Moshi = Moshi.Builder()
-        .add(MoshiConverterFactory::class).build()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 
     @Singleton
     @Provides
     fun provideMainRepository(
         currencyApi: CurrencyApi
-    ): DefaultMainRepository = DefaultMainRepository(currencyApi)
+    ): MainRepository = DefaultMainRepository(currencyApi)
 
     @Singleton
     @Provides
@@ -54,5 +57,4 @@ object AppModule {
         override val unconfined: CoroutineDispatcher
             get() = Dispatchers.Unconfined
     }
-
 }
